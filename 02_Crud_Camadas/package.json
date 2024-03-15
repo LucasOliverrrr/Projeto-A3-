@@ -1,0 +1,12 @@
+{
+  "name": "02_crud_camadas",
+  "version": "1.0.0",
+  "description": "Nesta aula discutimos discutimos o padrão arquiterual REST , suas mensagens de status e JSON e instalamos o UUID",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

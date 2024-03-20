@@ -55,14 +55,18 @@ class PerfilService {
     return true;
   }
 
-  patch(id, profile_endereco, profile_cidade, country_id){
+  patch(id, updatedFields){
     
     const perfilIndex = perfis.findIndex((perfil) => perfil.id === id);
-    const perfil = perfis[perfilIndex];
-
     if(perfilIndex === -1) return null;
 
-    //
+    const perfil = perfis[perfilIndex];
+
+    for (const field in updatedFields) {
+      if (Object.prototype.hasOwnProperty.call(updatedFields, field)) {
+        perfil[field] = updatedFields[field];
+      }
+    }
 
     return perfil;
   }

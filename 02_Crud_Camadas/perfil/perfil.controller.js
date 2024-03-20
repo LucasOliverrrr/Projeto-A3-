@@ -49,15 +49,24 @@ class PerfilController {
         const { id } = req.params;
         const { profile_endereco, profile_cidade, country_id } = req.body;
 
-        const perfil = perfil.findOne(id);
+        const perfil = perfilService.findOne(id);
 
         if(!perfil) return res.status(404).send('User not found');
 
-        if (profile_endereco) perfil.profile_endereco = profile_endereco;
-        if (profile_cidade) perfil.profile_cidade = profile_cidade;
-        if (country_id) perfil.country_id = country_id;
+        const updatedFields = {};
+        if (profile_endereco) {
+            updatedFields.profile_endereco = profile_endereco;
+        }
+        if (profile_cidade) {
+            updatedFields.profile_cidade = profile_cidade;
+        }
+        if (country_id) {
+            updatedFields.country_id = country_id;
+        }
 
-        const patchPerfil = perfilService.update(perfil);
+        const updatedPerfil = perfilService.patch(id, updatedFields);
+
+        res.status(200).json(updatedPerfil);
     }
 }
 

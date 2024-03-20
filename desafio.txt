@@ -50,7 +50,7 @@ Descrição: Retorna todos os endereços associados ao perfil do usuário.
 Resposta de Sucesso: Código HTTP 200 (OK), com uma lista dos endereços.
 
 Endpoints:
-Get - users - Retorna uma lista de todos os usuários da base
+Get - perfil - Retorna uma lista de todos os usuários da base
 
 Post - perfil - cria um novo perfil com base em um id de usuário
 

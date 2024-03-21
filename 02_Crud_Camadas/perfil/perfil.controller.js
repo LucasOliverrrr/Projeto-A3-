@@ -27,19 +27,31 @@ class PerfilController {
         res.json(perfil);
     }
 
+    getPerfilByIdAndAddress(req, res){
+
+        const { id, address_id } = req.params;
+        const perfil = perfilService.findOneByIdAndAddress(id, address_id);
+
+        if(!perfil) {
+            return res.status(404).send('Register not found');
+        }
+
+        res.json(perfil);
+    }
+
     updatePerfil (req, res){
 
-        const { id } = req.params;
+        const { id, address_id } = req.params;
         const { profile_endereco, profile_cidade, country_id } = req.body;
-        const updatedPerfil = perfilService.update(id, profile_endereco, profile_cidade, country_id)
+        const updatedPerfil = perfilService.update(id, address_id, profile_endereco, profile_cidade, country_id)
         if (!updatedPerfil) return res.status(404).send('User not found');
         console.log("jose");
         res.status(200).json(updatedPerfil);
     }   
 
     deletePerfil (req, res) {
-        const { id } = req.params;
-        const result = perfilService.remove(id);
+        const { id, address_id } = req.params;
+        const result = perfilService.remove(id, address_id);
         if (!result) return res.status(404).send('User not found');
         res.status(204).send();
     }

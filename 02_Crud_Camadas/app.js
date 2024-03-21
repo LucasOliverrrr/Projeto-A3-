@@ -23,8 +23,9 @@ app.delete("/users/:id", (req, res) => userController.deleteUser(req, res));
 app.post("/perfil", (req, res) => perfilController.createPerfil(req, res));
 app.get("/perfil", (req, res) => perfilController.getAllPerfis(req, res));
 app.get("/perfil/:id", (req, res) => perfilController.getPerfilById(req, res));
-app.put("/perfil/:id", (req, res) => perfilController.updatePerfil(req, res));
-app.delete("/perfil/:id", (req, res) => perfilController.deletePerfil(req, res));
+app.get("/perfil/:id/address/:address_id", (req, res) => perfilController.getPerfilByIdAndAddress(req, res));
+app.put("/perfil/:id/address/:address_id", (req, res) => perfilController.updatePerfil(req, res));
+app.delete("/perfil/:id/address/:address_id", (req, res) => perfilController.deletePerfil(req, res));
 app.patch("/perfil/:id", (req, res) => perfilController.patchPerfil(req, res));
 
 app.listen(port, () => {

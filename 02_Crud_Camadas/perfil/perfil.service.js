@@ -7,19 +7,19 @@ const perfis = [
   //Perfis na memória são locados aqui
 
   {
-    id: uuidv4(),
-    address_id: "5",
-    profile_endereco: "São Paulo",
-    profile_cidade: "São Paulo",
-    country_id: "1",
+    user_id: "1",
+    profile_address_id: "1",
+    profile_endereco: "enderecos",
+    profile_cidade: "belo horizonte",
+    country_id: "br",
   },
 
   {
-    id: uuidv4(),
-    address_id: "12",
-    profile_endereco: "Rio de Janeiro",
-    profile_cidade: "Rio de Janeiro",
-    country_id: "2",
+    user_id: "1",
+    profile_address_id: "2",
+    profile_endereco: "enderecos",
+    profile_cidade: "belo horizonte",
+    country_id: "br",
   }
 
 ];
@@ -30,32 +30,31 @@ class PerfilService {
     return perfis.map((perfil) => new PerfilDTO(perfil)); 
   }
 
-  findOne(id){
-    return perfis.find((perfil) => perfil.id === id);
+  findOne(user_id){
+    return perfis.find((perfil) => perfil.user_id === id);
   }
 
-  findOneByIdAndAddress(id, address_id){
-    return perfis.find((perfil) => perfil.id === id && perfil.address_id === address_id);
+  findOneByIdAndAddress(user_id, address_id){
+    return perfis.find((perfil) => perfil.user_id === id && perfil.address_id === address_id);
   }
 
-  create(id, profile_endereco, profile_cidade, country_id) {
-    id = uuidv4();
-    const newPerfil = new Perfil(id, profile_endereco, profile_cidade, country_id);
-    perfis.push(newPerfil);
-    return newPerfil;
+  create(perfilDTO) {
+    perfilDTO.profile_address_id = uuidv4();
+    perfis.push(perfilDTO);
+    return perfilDTO;
   }
 
-  update(id, address_id, profile_endereco, profile_cidade, country_id){
+  update(user_id, address_id, profile_endereco, profile_cidade, country_id){
     const perfilIndex = perfis.findIndex((perfil) => perfil.id === id && perfil.address_id === address_id);
     if (perfilIndex === -1) return null;
-    const updatedPerfil = { id, profile_endereco, profile_cidade, country_id };
+    const updatedPerfil = { user_id, profile_endereco, profile_cidade, country_id };
     perfis[perfilIndex] = updatedPerfil;
     return updatedPerfil;
   }
 
-  remove(id, address_id) {
+  remove(user_id, address_id) {
 
-    const perfilIndex = perfis.findIndex((perfil) => perfil.id === id && perfil.address_id === address_id);
+    const perfilIndex = perfis.findIndex((perfil) => perfil.user_id === id && perfil.address_id === address_id);
     if(perfilIndex === -1) return false;
     perfis.splice(perfilIndex, 1);
     return true;
@@ -79,3 +78,4 @@ class PerfilService {
 }
 
 module.exports = PerfilService;
+export default PerfilService; 

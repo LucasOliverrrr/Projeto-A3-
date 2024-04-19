@@ -1,3 +1,4 @@
+const PerfilDTO = require("./perfil.dto").default;
 const PerfilService = require('./perfil.service');
 const perfilService = new PerfilService(); //Perguntar depois
 
@@ -5,9 +6,8 @@ class PerfilController {
 
     createPerfil (req, res) {
 
-        const { id, profile_endereco, profile_cidade, country_id } = req.body;
-        const perfil = perfilService.create(id, profile_endereco, profile_cidade, country_id);
-        res.json(perfil);
+        req.body.user_id = req.params.user_id;
+        res.json(perfilService.create(new PerfilDTO(req.body)));
     }
 
     getAllPerfis(req, res) {
@@ -17,8 +17,8 @@ class PerfilController {
 
     getPerfilById (req, res){
 
-        const { id } = req.params;
-        const perfil = perfilService.findOne(id);
+        const { user_id } = req.params;
+        const perfil = perfilService.findOne(user_id);
 
         if(!perfil) {
             return res.status(404).send('Register not found');
@@ -29,8 +29,8 @@ class PerfilController {
 
     getPerfilByIdAndAddress(req, res){
 
-        const { id, address_id } = req.params;
-        const perfil = perfilService.findOneByIdAndAddress(id, address_id);
+        const { user_id, address_id } = req.params;
+        const perfil = perfilService.findOneByIdAndAddress(user_id, address_id);
 
         if(!perfil) {
             return res.status(404).send('Register not found');
@@ -41,27 +41,27 @@ class PerfilController {
 
     updatePerfil (req, res){
 
-        const { id, address_id } = req.params;
+        const { user_id, address_id } = req.params;
         const { profile_endereco, profile_cidade, country_id } = req.body;
-        const updatedPerfil = perfilService.update(id, address_id, profile_endereco, profile_cidade, country_id)
+        const updatedPerfil = perfilService.update(user_id, address_id, profile_endereco, profile_cidade, country_id)
         if (!updatedPerfil) return res.status(404).send('User not found');
         console.log("jose");
         res.status(200).json(updatedPerfil);
     }   
 
     deletePerfil (req, res) {
-        const { id, address_id } = req.params;
-        const result = perfilService.remove(id, address_id);
+        const { user_id, address_id } = req.params;
+        const result = perfilService.remove(user_id, address_id);
         if (!result) return res.status(404).send('User not found');
         res.status(204).send();
     }
 
     patchPerfil (req, res) {
 
-        const { id } = req.params;
+        const { user_id } = req.params;
         const { profile_endereco, profile_cidade, country_id } = req.body;
 
-        const perfil = perfilService.findOne(id);
+        const perfil = perfilService.findOne(user_id);
 
         if(!perfil) return res.status(404).send('User not found');
 

@@ -20,13 +20,13 @@ app.put("/users/:id", (req, res) => userController.updateUser(req, res));
 app.delete("/users/:id", (req, res) => userController.deleteUser(req, res));
 
 // Rotas para o CRUD de Perfil
-app.post("/perfil", (req, res) => perfilController.createPerfil(req, res));
+app.post("/perfil/:user_id", (req, res) => perfilController.createPerfil(req, res));
 app.get("/perfil", (req, res) => perfilController.getAllPerfis(req, res));
-app.get("/perfil/:id", (req, res) => perfilController.getPerfilById(req, res));
-app.get("/perfil/:id/address/:address_id", (req, res) => perfilController.getPerfilByIdAndAddress(req, res));
-app.put("/perfil/:id/address/:address_id", (req, res) => perfilController.updatePerfil(req, res));
-app.delete("/perfil/:id/address/:address_id", (req, res) => perfilController.deletePerfil(req, res));
-app.patch("/perfil/:id", (req, res) => perfilController.patchPerfil(req, res));
+app.get("/perfil/:user_id", (req, res) => perfilController.getPerfilById(req, res));
+app.get("/perfil/:user_id/address/:address_id", (req, res) => perfilController.getPerfilByIdAndAddress(req, res));
+app.put("/perfil/:user_id/address/:address_id", (req, res) => perfilController.updatePerfil(req, res));
+app.delete("/perfil/:user_id/address/:address_id", (req, res) => perfilController.deletePerfil(req, res));
+app.patch("/perfil/:user_id", (req, res) => perfilController.patchPerfil(req, res));
 
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);

@@ -1,7 +1,7 @@
 class Perfil {
 
-    constructor(id, address_id, profile_endereco, profile_cidade, country_id) {
-        this.id = id;
+    constructor(user_id, address_id, profile_endereco, profile_cidade, country_id) {
+        this.user_id = id;
         this.address_id = address_id;
         this.profile_endereco = profile_endereco;
         this.profile_cidade = profile_cidade;
@@ -10,3 +10,4 @@ class Perfil {
 }
 
 module.exports = Perfil;
+export default Perfil;

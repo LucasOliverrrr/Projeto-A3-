@@ -28,9 +28,12 @@ class UserService {
     return users.find((user) => user.user_id === id);
   }
 
-  create(userDTO) {
-    users.push(userDTO);
-    return userDTO;
+  create(user_email, user_password) {
+    const user_id = uuidv4();
+    const newUser = new User({ user_id, user_email, user_password });
+    console.log(newUser);
+    users.push(newUser);
+    return newUser;
   }
 
   update(userDTO) {

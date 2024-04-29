@@ -5,11 +5,9 @@ const UserDTO = require("./user.dto.js");
 
 class UserController {
   createUser(req, res) {
-    try {
-      res.json(userService.create(new UserDTO(req.body, true)));
-    } catch(error) {
-      res.status(400).json({ msg: error.message });
-    }
+    const { user_email, user_password } = req.body;
+    const user = userService.create(user_email, user_password);
+    res.json(user);
   }
 
   getAllUsers(req, res) {

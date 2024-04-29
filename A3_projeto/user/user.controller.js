@@ -6,7 +6,6 @@ const UserDTO = require("./user.dto.js");
 class UserController {
   createUser(req, res) {
     try {
-      req.body.user_id = uuidv4();
       res.json(userService.create(new UserDTO(req.body, true)));
     } catch(error) {
       res.status(400).json({ msg: error.message });
@@ -34,8 +33,7 @@ class UserController {
   }
 
   deleteUser(req, res) {
-    const { user_id } = req.params;
-    const result = userService.remove(user_id);
+    const result = userService.remove(req.params.id);
     if (!result) return res.status(404).send("Usuário não encontrado");
     res.status(204).send();
   }

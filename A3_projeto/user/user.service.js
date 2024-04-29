@@ -41,7 +41,7 @@ class UserService {
   }
 
   remove(id) {
-    const userIndex = users.findIndex((user) => user.id === id);
+    const userIndex = users.findIndex((user) => user.user_id === id);
     if (userIndex === -1) return false;
     users.splice(userIndex, 1);
     return true;

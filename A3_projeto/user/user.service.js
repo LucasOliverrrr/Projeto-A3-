@@ -25,7 +25,7 @@ class UserService {
   }
 
   findOne(id) {
-    return users.find((user) => user.id === id);
+    return users.find((user) => user.user_id === id);
   }
 
   create(userDTO) {

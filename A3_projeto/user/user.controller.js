@@ -1,13 +1,15 @@
-const { v4: uuidv4 } = require("uuid");
+
 const UserService = require("./user.service");
 const userService = new UserService();
 const UserDTO = require("./user.dto.js");
 
 class UserController {
   createUser(req, res) {
-    const { user_email, user_password } = req.body;
-    const user = userService.create(user_email, user_password);
-    res.json(user);
+    try {
+      res.json(userService.createUser(new UserDTO(req.body, true)));
+    } catch(error) {
+      res.status(400).json({ msg: error.message });
+    }
   }
 
   getAllUsers(req, res) {

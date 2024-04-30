@@ -15,6 +15,7 @@ app.get("/users", (req, res) => userController.getAllUsers(req, res));
 app.get("/users/:id", (req, res) => userController.getUserById(req, res));
 app.put("/users/:id", (req, res) => userController.updateUser(req, res));
 app.delete("/users/:id", (req, res) => userController.deleteUser(req, res));
+app.post("/users/register", (req, res) => userController.register(req, res));
 app.post("/users/login", (req, res) => userController.login(req, res));
 
 //Para executar o servidor, use o comando 'node app.js' no CMD.

@@ -47,21 +47,28 @@ class UserService {
     return true;
   }
 
-  /*
-  registro(user_email, user_password) {
-    const repetido = users.find((user) => user.email == user_email)
+  register(user_email, user_password) {
+    const repetido = users.find((user) => user.user_email === user_email);
     if (repetido) {
-      console.log("Já existe uma conta com este email");
-      return false
-    };
-  }
-  */
+        console.log("Já existe uma conta com este email");
+        return false;
+    } else {
+        const novoUsuario = new UserDTO({
+            user_id: uuidv4(), // Gerando um ID único
+            user_email: user_email,
+            user_password: user_password
+        });
+        users.push(novoUsuario);
+        return novoUsuario;
+    }
+}
 
-  async login(user_email, user_password) {
+  login(user_email, user_password) {
     const userIndex = users.findIndex((user) => user.user_email === user_email);
-    if (userIndex === -1) return false;
+    if (userIndex === -1) return false; // Usuário não encontrado
     try {
-      return await bcrypt.compare(user_password, users[userIndex].user_password);
+      const match = bcrypt.compareSync(user_password, users[userIndex].user_password);
+      return match; // Retorna true se as senhas coincidirem, senão false
     } catch (error) {
       throw new Error("Erro na verificação da senha");
     }

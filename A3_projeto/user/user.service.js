@@ -39,10 +39,22 @@ class UserService {
   
     // Atualiza os dados do usuário
     users[userIndex].user_email = updatedUserData.user_email;
-    users[userIndex].user_password = updatedUserData.user_password;
+    
+    // Verifica se uma nova senha foi fornecida
+    if (updatedUserData.user_password) {
+      // Valida e hashea a nova senha
+      const updatedUserDTO = new UserDTO({
+        user_email: updatedUserData.user_email,
+        user_password: updatedUserData.user_password,
+      }, true);
+  
+      // Atualiza a senha hasheada no usuário
+      users[userIndex].user_password = updatedUserDTO.user_password;
+    }
   
     return users[userIndex];
   }
+  
   remove(id) {
     const userIndex = users.findIndex((user) => user.user_id === id);
     if (userIndex === -1) return false;

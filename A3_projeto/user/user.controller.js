@@ -27,7 +27,7 @@ class UserController {
 
   updateUser(req, res) {
     try {
-      const updatedUser = userService.update(req.params.id, new UserDTO(req.body));
+      const updatedUser = userService.update(req.params.id, req.body);
       if (!updatedUser) return res.status(404).send("Usuário não encontrado");
       res.status(200).json(updatedUser);
     } catch (error) {

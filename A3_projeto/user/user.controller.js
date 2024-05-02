@@ -26,10 +26,13 @@ class UserController {
   }
 
   updateUser(req, res) {
-    req.body.id = req.params.id;
-    const updatedUser = userService.update(new UserDTO(req.body));
-    if (!updatedUser) return res.status(404).send("Usuário não encontrado");
-    res.status(200).json(updatedUser);
+    try {
+      const updatedUser = userService.update(req.params.id, new UserDTO(req.body));
+      if (!updatedUser) return res.status(404).send("Usuário não encontrado");
+      res.status(200).json(updatedUser);
+    } catch (error) {
+      res.status(400).json({ msg: error.message });
+    }
   }
 
   deleteUser(req, res) {
@@ -50,9 +53,9 @@ class UserController {
 
   async login(req, res){
     if(await userService.login(req.body.user_email, req.body.user_password)){
-      res.status(200).send('usuário logado'); 
+      res.status(200).send('Usuário Logado'); 
     } else {
-      res.status(401).send('usuário não autorizado'); 
+      res.status(401).send('Usuário e/ou senha errada'); 
     }
   }
 }

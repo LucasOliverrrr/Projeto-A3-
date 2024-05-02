@@ -33,13 +33,16 @@ class UserService {
       return UserDTO;
   }
 
-  update(userDTO) {
-    const userIndex = users.findIndex((user) => user.id === userDTO.id);
+  update(id, updatedUserData) {
+    const userIndex = users.findIndex((user) => user.user_id === id);
     if (userIndex === -1) return null;
-    users[userIndex] = userDTO;
-    return userDTO;
+  
+    // Atualiza os dados do usuário
+    users[userIndex].user_email = updatedUserData.user_email;
+    users[userIndex].user_password = updatedUserData.user_password;
+  
+    return users[userIndex];
   }
-
   remove(id) {
     const userIndex = users.findIndex((user) => user.user_id === id);
     if (userIndex === -1) return false;

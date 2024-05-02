@@ -23,7 +23,7 @@ class UserDTO {
   // Validação do formato de e-mail
   setEmail(user_email) {
     if (!/^\S+@\S+\.\S+$/.test(user_email))
-      throw new Error("Formato de emial inválido");
+      throw new Error("Formato de email inválido");
     this.user_email = user_email;
   }
 
